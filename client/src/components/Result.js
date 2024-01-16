@@ -1,4 +1,4 @@
-
+import "../styles/Result.css"
 
 const Result=() =>(
     <div>
