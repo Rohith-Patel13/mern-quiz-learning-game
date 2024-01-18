@@ -1,28 +1,36 @@
-/*
-In the newer versions of react-router-dom (v6), 
-the Switch component has been replaced with the 
-Routes component. The Routes component handles 
-route matching and rendering.
-
-
-In React Router v6, the element prop in the Route component 
-is used to render the content for a particular route.
-*/
-import {Routes , Route} from 'react-router-dom'
-
 import '../styles/App.css';
 
-// import components 
-import Main from './Main'
-import Quiz from "./Quiz";
-import Result from "./Result";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-const App = () => (
-  <Routes>
-    <Route path="/" element={<Main />} />
-    <Route path="/quiz" element={<Quiz />} />
-    <Route path="/result" element={<Result />} />
-  </Routes>
-)
+/** import components */
+import Main from './Main';
+import Quiz from './Quiz';
+import Result from './Result';
+import { CheckUserExist } from '../helper/helper';
+
+
+/** react routes */
+const router = createBrowserRouter([
+  {
+    path : '/',
+    element : <Main></Main>
+  },
+  {
+    path : '/quiz',
+    element : <CheckUserExist><Quiz /></CheckUserExist>
+  },
+  {
+    path : '/result',
+    element : <CheckUserExist><Result /></CheckUserExist>
+  },
+])
+
+function App() {
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
+}
 
 export default App;
